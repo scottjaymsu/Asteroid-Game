@@ -22,7 +22,7 @@ public class Ship {
         this.character.setTranslateX(x);
         this.character.setTranslateY(y);
 
-        this.movement = new Point2D(1, 0);
+        this.movement = new Point2D(0, 0);
     }
 
     /**
@@ -53,5 +53,15 @@ public class Ship {
     public void move() {
         this.character.setTranslateX(this.character.getTranslateX() + this.movement.getX());
         this.character.setTranslateY(this.character.getTranslateY() + this.movement.getY());
+    }
+
+    public void accelerate() {
+        double changeX = Math.cos(Math.toRadians(this.character.getRotate()));
+        double changeY = Math.sin(Math.toRadians(this.character.getRotate()));
+
+        changeX *= 0.05;
+        changeY *= 0.05;
+
+        this.movement = this.movement.add(changeX, changeY);
     }
 }

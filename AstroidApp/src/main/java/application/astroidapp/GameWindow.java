@@ -58,7 +58,7 @@ public class GameWindow extends Application {
         });
 
         /**
-         * AnimationTimer to test event handlers
+         * AnitmationTimer object is used to update the game elements and their methods.
          */
         new AnimationTimer() {
             @Override
@@ -69,6 +69,10 @@ public class GameWindow extends Application {
 
                 if(pressedKeys.getOrDefault(KeyCode.RIGHT, false)) {
                     ship.turnRight();
+                }
+
+                if(pressedKeys.getOrDefault(KeyCode.UP, false)) {
+                    ship.accelerate();
                 }
 
                 ship.move();
