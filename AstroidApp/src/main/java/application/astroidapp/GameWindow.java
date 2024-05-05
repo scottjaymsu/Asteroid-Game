@@ -1,12 +1,14 @@
 package application.astroidapp;
 
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * GameWindow Class
@@ -24,14 +26,19 @@ public class GameWindow extends Application {
         Pane pane = new Pane();
         pane.setPrefSize(600, 400);
 
-        // Polygon object is used to draw ship
-        Polygon ship = new Polygon(-5, -5, 10, 0, -5, 5);
-        ship.setTranslateX(300);
-        ship.setTranslateY(200);
-        ship.setRotate(30);
+        Ship ship = new Ship(150, 100);
 
         // UI element is added to Pane container as child node
-        pane.getChildren().add(ship);
+        pane.getChildren().add(ship.getCharacter());
+
+//        // Polygon object is used to draw ship
+//        Polygon ship = new Polygon(-5, -5, 10, 0, -5, 5);
+//        ship.setTranslateX(300);
+//        ship.setTranslateY(200);
+//        ship.setRotate(30);
+//
+//        // UI element is added to Pane container as child node
+//        pane.getChildren().add(ship);
 
         // Scene is specified and the pane is used as the root
         Scene scene = new Scene(pane);
@@ -39,8 +46,34 @@ public class GameWindow extends Application {
         stage.setScene(scene);
         stage.show();
 
-        // Ship movement handler
-        scene.setOnKeyPressed(event -> HandleShip(event, ship));
+        // Record of pressed keys
+        Map<KeyCode, Boolean> pressedKeys = new HashMap<>();
+
+        scene.setOnKeyPressed(event -> {
+            pressedKeys.put(event.getCode(), Boolean.TRUE);
+        });
+
+        scene.setOnKeyReleased(event -> {
+            pressedKeys.put(event.getCode(), Boolean.FALSE);
+        });
+
+        /**
+         * AnimationTimer to test event handlers
+         */
+        new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if(pressedKeys.getOrDefault(KeyCode.LEFT, false)) {
+                    ship.turnLeft();
+                }
+
+                if(pressedKeys.getOrDefault(KeyCode.RIGHT, false)) {
+                    ship.turnRight();
+                }
+
+                ship.move();
+            }
+        }.start();
     }
 
     /**
@@ -51,14 +84,14 @@ public class GameWindow extends Application {
         launch(args);
     }
 
-    public void HandleShip(KeyEvent event, Polygon ship)
-    {
-        if (event.getCode() == KeyCode.LEFT) {
-            ship.setRotate(ship.getRotate() - 5);
-        }
-
-        if (event.getCode() == KeyCode.RIGHT) {
-            ship.setRotate(ship.getRotate() + 5);
-        }
-    }
+//    public void HandleShip(KeyEvent event, Polygon ship)
+//    {
+//        if (event.getCode() == KeyCode.LEFT) {
+//            ship.setRotate(ship.getRotate() - 5);
+//        }
+//
+//        if (event.getCode() == KeyCode.RIGHT) {
+//            ship.setRotate(ship.getRotate() + 5);
+//        }
+//    }
 }
