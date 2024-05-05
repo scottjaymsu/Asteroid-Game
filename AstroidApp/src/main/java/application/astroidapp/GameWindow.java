@@ -27,18 +27,16 @@ public class GameWindow extends Application {
         pane.setPrefSize(600, 400);
 
         Ship ship = new Ship(150, 100);
+        Asteroid asteroid = new Asteroid(50, 50);
 
         // UI element is added to Pane container as child node
         pane.getChildren().add(ship.getCharacter());
+        pane.getChildren().add(asteroid.getCharacter());
 
-//        // Polygon object is used to draw ship
-//        Polygon ship = new Polygon(-5, -5, 10, 0, -5, 5);
-//        ship.setTranslateX(300);
-//        ship.setTranslateY(200);
-//        ship.setRotate(30);
-//
-//        // UI element is added to Pane container as child node
-//        pane.getChildren().add(ship);
+        asteroid.turnRight();
+        asteroid.turnRight();
+        asteroid.accelerate();
+        asteroid.accelerate();
 
         // Scene is specified and the pane is used as the root
         Scene scene = new Scene(pane);
@@ -76,6 +74,7 @@ public class GameWindow extends Application {
                 }
 
                 ship.move();
+                asteroid.move();
             }
         }.start();
     }
@@ -87,15 +86,4 @@ public class GameWindow extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-//    public void HandleShip(KeyEvent event, Polygon ship)
-//    {
-//        if (event.getCode() == KeyCode.LEFT) {
-//            ship.setRotate(ship.getRotate() - 5);
-//        }
-//
-//        if (event.getCode() == KeyCode.RIGHT) {
-//            ship.setRotate(ship.getRotate() + 5);
-//        }
-//    }
 }

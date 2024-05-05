@@ -3,16 +3,16 @@ package application.astroidapp;
 import javafx.scene.shape.Polygon;
 
 /**
- * Ship Class
+ * Asteroid Class
  * Inherits from Character Abstract Class.
  */
-public class Ship extends Character {
+public class Asteroid extends Character {
     /**
-     * Constructor for Ship Class
+     * Constructor for Asteroid Class
      * @param x Location along x-axis
      * @param y Location along y-axis
      */
-    public Ship(int x, int y) {
-        super(new Polygon(-5, -5, 10, 0, -5, 5), x, y);
+    public Asteroid(int x, int y) {
+        super(new Polygon(20, -20, 20, 20, -20, 20, -20, -20), x, y);
     }
 }
