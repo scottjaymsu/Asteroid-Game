@@ -64,14 +64,17 @@ public class GameWindow extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
+                // Check if LEFT key is pressed and call turnLeft method of Ship
                 if(pressedKeys.getOrDefault(KeyCode.LEFT, false)) {
                     ship.turnLeft();
                 }
 
+                // Check if RIGHT key is pressed and call turnRIGHT method of Ship
                 if(pressedKeys.getOrDefault(KeyCode.RIGHT, false)) {
                     ship.turnRight();
                 }
 
+                // Check if UP key is pressed and call accelerate method of Ship
                 if(pressedKeys.getOrDefault(KeyCode.UP, false)) {
                     ship.accelerate();
                 }

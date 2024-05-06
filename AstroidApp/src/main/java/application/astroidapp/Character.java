@@ -8,8 +8,9 @@ import javafx.scene.shape.Shape;
  * Character Abstract Class
  */
 public abstract class Character {
-
+    // Polygon shape
     private Polygon character;
+    // Defines a point representing a location in (x,y) coordinate space.
     private Point2D movement;
 
     /**
