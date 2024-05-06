@@ -7,8 +7,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * GameWindow Class
@@ -26,17 +25,20 @@ public class GameWindow extends Application {
         Pane pane = new Pane();
         pane.setPrefSize(600, 400);
 
+        // Initialize Ship
         Ship ship = new Ship(150, 100);
-        Asteroid asteroid = new Asteroid(50, 50);
+
+        // Initialize list of Asteroid to avoid
+        List<Asteroid> asteroids = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Random rand = new Random();
+            Asteroid asteroid = new Asteroid(rand.nextInt(100), rand.nextInt(100));
+            asteroids.add(asteroid);
+        }
 
         // UI element is added to Pane container as child node
         pane.getChildren().add(ship.getCharacter());
-        pane.getChildren().add(asteroid.getCharacter());
-
-        asteroid.turnRight();
-        asteroid.turnRight();
-        asteroid.accelerate();
-        asteroid.accelerate();
+        asteroids.forEach(asteroid -> pane.getChildren().add(asteroid.getCharacter()));
 
         // Scene is specified and the pane is used as the root
         Scene scene = new Scene(pane);
@@ -75,12 +77,14 @@ public class GameWindow extends Application {
                 }
 
                 ship.move();
-                asteroid.move();
+                asteroids.forEach(asteroid -> asteroid.move());
 
-                // If Ship collides with Asteroid, animation is stopped
-                if (ship.collide(asteroid)) {
-                    stop();
-                }
+                // If Ship collides with Asteroid within list of asteroids, animation is stopped
+                asteroids.forEach(asteroid -> {
+                    if (ship.collide(asteroid)) {
+                        stop();
+                    }
+                });
             }
         }.start();
     }
