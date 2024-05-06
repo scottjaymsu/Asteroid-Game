@@ -130,7 +130,7 @@ public abstract class Character {
 
     /**
      * Setter for the alive attribute
-     * @param cond Boolean value to set as alive attribute
+     * @param cond Boolean value to set alive attribute
      */
     public void setAlive(boolean cond) { this.alive = cond; }
 }

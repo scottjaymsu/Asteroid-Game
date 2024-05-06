@@ -29,7 +29,7 @@ public class GameWindow extends Application {
     public void start(Stage stage) throws Exception {
         // Pane layout arranges the nodes in the application
         Pane pane = new Pane();
-        pane.setPrefSize(width,height);
+        pane.setPrefSize(width, height);
 
         // Initialize Ship
         Ship ship = new Ship(width / 2, height / 2);
@@ -87,17 +87,17 @@ public class GameWindow extends Application {
             @Override
             public void handle(long now) {
                 // Check if LEFT key is pressed and call turnLeft method of Ship
-                if(pressedKeys.getOrDefault(KeyCode.LEFT, false)) {
+                if (pressedKeys.getOrDefault(KeyCode.LEFT, false)) {
                     ship.turnLeft();
                 }
 
                 // Check if RIGHT key is pressed and call turnRIGHT method of Ship
-                if(pressedKeys.getOrDefault(KeyCode.RIGHT, false)) {
+                if (pressedKeys.getOrDefault(KeyCode.RIGHT, false)) {
                     ship.turnRight();
                 }
 
                 // Check if UP key is pressed and call accelerate method of Ship
-                if(pressedKeys.getOrDefault(KeyCode.UP, false)) {
+                if (pressedKeys.getOrDefault(KeyCode.UP, false)) {
                     ship.accelerate();
                 }
 
@@ -136,7 +136,7 @@ public class GameWindow extends Application {
                 // If Projectile collides with an Asteroid, then it's alive attribute is set to False
                 projectiles.forEach(projectile -> {
                     asteroids.forEach(asteroid -> {
-                        if(projectile.collide(asteroid)) {
+                        if (projectile.collide(asteroid)) {
                             projectile.setAlive(false);
                             asteroid.setAlive(false);
                         }
