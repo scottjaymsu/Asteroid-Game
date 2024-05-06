@@ -55,6 +55,7 @@ public class GameWindow extends Application {
             pressedKeys.put(event.getCode(), Boolean.FALSE);
         });
 
+
         /**
          * AnitmationTimer object is used to update the game elements and their methods.
          */
@@ -75,6 +76,11 @@ public class GameWindow extends Application {
 
                 ship.move();
                 asteroid.move();
+
+                // If Ship collides with Asteroid, animation is stopped
+                if (ship.collide(asteroid)) {
+                    stop();
+                }
             }
         }.start();
     }

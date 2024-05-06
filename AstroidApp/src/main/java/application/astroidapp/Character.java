@@ -2,6 +2,7 @@ package application.astroidapp;
 
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Shape;
 
 /**
  * Character Abstract Class
@@ -66,5 +67,15 @@ public abstract class Character {
         changeY *= 0.05;
 
         this.movement = this.movement.add(changeX, changeY);
+    }
+
+    /**
+     * Check for collision between characters
+     * @param other The other character that is collided with
+     * @return If the intersection is 0, there is no collision and False is outputted
+     */
+    public boolean collide(Character other) {
+        Shape collisionArea = Shape.intersect(this.character, other.getCharacter());
+        return collisionArea.getBoundsInLocal().getWidth() != -1;
     }
 }
