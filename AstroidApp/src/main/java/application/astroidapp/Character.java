@@ -11,8 +11,12 @@ import javafx.scene.shape.Shape;
 public abstract class Character {
     // Polygon shape
     private Polygon character;
+
     // Defines a point representing a location in (x,y) coordinate space.
     private Point2D movement;
+
+    // Used to identify whether a Character is 'in the game' or not
+    private boolean alive = true;
 
     /**
      * Constructor for Character class
@@ -107,14 +111,26 @@ public abstract class Character {
     }
 
     /**
-     * Getter for the movement member
-     * @return Point2D movement member
+     * Getter for the movement attribute
+     * @return Point2D movement attribute
      */
     public Point2D getMovement() { return this.movement; }
 
     /**
-     * Setter for the movement member
-     * @param newMovement New movement to set as the movement member
+     * Setter for the movement attribute
+     * @param newMovement New movement to set as the movement attribute
      */
     public void setMovement(Point2D newMovement) { this.movement = newMovement; }
+
+    /**
+     * Check if this Character is 'in the game'
+     * @return True if this Character is 'in the game,' otherwise false
+     */
+    public boolean isAlive() { return this.alive; }
+
+    /**
+     * Setter for the alive attribute
+     * @param cond Boolean value to set as alive attribute
+     */
+    public void setAlive(boolean cond) { this.alive = cond; }
 }
