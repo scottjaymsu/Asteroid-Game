@@ -1,5 +1,6 @@
 package application.astroidapp;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -50,12 +51,37 @@ public abstract class Character {
     }
 
     /**
-     * Moves this character along the x and/or y axes
+     * Moves this character along the x and y axes
      */
     public void move() {
-        this.character.setTranslateX(this.character.getTranslateX() + this.movement.getX());
-        this.character.setTranslateY(this.character.getTranslateY() + this.movement.getY());
+        double newX = this.character.getTranslateX() + this.movement.getX();
+        double newY = this.character.getTranslateY() + this.movement.getY();
+
+        // Get the bounds of the character in the parent's coordinate system
+        Bounds bounds = this.character.getBoundsInParent();
+        double minX = bounds.getMinX();
+        double minY = bounds.getMinY();
+        double maxX = bounds.getMaxX();
+        double maxY = bounds.getMaxY();
+
+        // Check if the new position is outside the screen bounds and adjust if necessary
+        if (newX < 0) {
+            newX = 0; // Keep the character at the left edge of the screen
+        } else if (newX > GameWindow.width - (maxX - minX)) {
+            newX = GameWindow.width - (maxX - minX); // Adjust for character width
+        }
+
+        if (newY < 0) {
+            newY = 0; // Keep the character at the top edge of the screen
+        } else if (newY > GameWindow.height - (maxY - minY)) {
+            newY = GameWindow.height - (maxY - minY); // Adjust for character height
+        }
+
+        // Update the character's position
+        this.character.setTranslateX(newX);
+        this.character.setTranslateY(newY);
     }
+
 
     /**
      * Accelerates the speed at which this character moves

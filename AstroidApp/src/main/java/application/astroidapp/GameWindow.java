@@ -13,6 +13,11 @@ import java.util.*;
  * GameWindow Class
  */
 public class GameWindow extends Application {
+    // Width of GameWindow that can be accessed throughout project
+    public static int width = 300;
+    // Height of GameWindow that can be accessed throughout project
+    public static int height = 200;
+
     /**
      * Automatically called when JavaFX application is launched.
      * Sets up the initial stage with a Pane and a Scene for the game.
@@ -23,16 +28,16 @@ public class GameWindow extends Application {
     public void start(Stage stage) throws Exception {
         // Pane layout arranges the nodes in the application
         Pane pane = new Pane();
-        pane.setPrefSize(600, 400);
+        pane.setPrefSize(width,height);
 
         // Initialize Ship
-        Ship ship = new Ship(150, 100);
+        Ship ship = new Ship(width / 2, height / 2);
 
         // Initialize list of Asteroid to avoid
         List<Asteroid> asteroids = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Random rand = new Random();
-            Asteroid asteroid = new Asteroid(rand.nextInt(100), rand.nextInt(100));
+            Asteroid asteroid = new Asteroid(rand.nextInt(width / 3), rand.nextInt(height));
             asteroids.add(asteroid);
         }
 
