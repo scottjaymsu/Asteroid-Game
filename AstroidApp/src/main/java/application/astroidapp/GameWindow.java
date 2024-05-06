@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * GameWindow Class
@@ -53,6 +54,10 @@ public class GameWindow extends Application {
             asteroids.add(asteroid);
         }
 
+        // Projectile list will start empty
+        // Projectiles are created when the user pressed the spacebar
+        List<Projectile> projectiles = new ArrayList<>();
+
         // UI element is added to Pane container as child node
         pane.getChildren().add(ship.getCharacter());
         asteroids.forEach(asteroid -> pane.getChildren().add(asteroid.getCharacter()));
@@ -96,8 +101,37 @@ public class GameWindow extends Application {
                     ship.accelerate();
                 }
 
+                // Check if SPACE key is pressed and there are less than 3 projectiles then create Projectile
+                if (pressedKeys.getOrDefault(KeyCode.SPACE, false) && projectiles.size() < 3) {
+                    // Projectile instance at ship's current location
+                    Projectile projectile = new Projectile((int) ship.getCharacter().getTranslateX(), (int) ship.getCharacter().getTranslateY());
+                    // Set the rotation of the projectile to match the ship's rotation
+                    projectile.getCharacter().setRotate(ship.getCharacter().getRotate());
+
+                    projectiles.add(projectile);
+
+                    projectile.accelerate();
+                    projectile.setMovement(projectile.getMovement().normalize().multiply(3));
+
+                    pane.getChildren().add(projectile.getCharacter());
+                }
+
+                // Character movement
                 ship.move();
                 asteroids.forEach(asteroid -> asteroid.move());
+
+                projectiles.forEach(projectile -> {
+                    List<Asteroid> collisions = asteroids.stream() // Create stream
+                            .filter(asteroid -> asteroid.collide(projectile)) // Filter through stream to find asteroids that collide with projectile
+                            .collect(Collectors.toList()); // Collect colliders and add to collision list
+
+                    collisions.stream().forEach(collided -> {
+                        asteroids.remove(collided); // Remove collided from original asteroids list
+                        pane.getChildren().remove(collided.getCharacter()); // Update Pane elements
+                    });
+
+                    projectile.move();
+                });
 
                 // If Ship collides with Asteroid within list of asteroids, animation is stopped
                 asteroids.forEach(asteroid -> {

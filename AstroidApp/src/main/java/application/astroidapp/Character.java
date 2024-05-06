@@ -105,4 +105,16 @@ public abstract class Character {
         Shape collisionArea = Shape.intersect(this.character, other.getCharacter());
         return collisionArea.getBoundsInLocal().getWidth() != -1;
     }
+
+    /**
+     * Getter for the movement member
+     * @return Point2D movement member
+     */
+    public Point2D getMovement() { return this.movement; }
+
+    /**
+     * Setter for the movement member
+     * @param newMovement New movement to set as the movement member
+     */
+    public void setMovement(Point2D newMovement) { this.movement = newMovement; }
 }

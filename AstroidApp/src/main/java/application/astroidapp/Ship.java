@@ -4,7 +4,7 @@ import javafx.scene.shape.Polygon;
 
 /**
  * Ship Class
- * Inherits from Character Abstract Class.
+ * Inherits from Character Class.
  */
 public class Ship extends Character {
     /**

@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Asteroid Class
- * Inherits from Character Abstract Class.
+ * Inherits from Character Class.
  */
 public class Asteroid extends Character {
     // Randomness to add to movement
