@@ -33,6 +33,18 @@ public class GameWindow extends Application {
         // Initialize Ship
         Ship ship = new Ship(width / 2, height / 2);
 
+        // Resize listener for width
+        pane.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            width = newWidth.intValue();
+            pane.setPrefWidth(width);
+        });
+
+        // Resize listener for height
+        pane.heightProperty().addListener((obs, oldHeight, newHeight) -> {
+            height = newHeight.intValue();
+            pane.setPrefHeight(height);
+        });
+
         // Initialize list of Asteroid to avoid
         List<Asteroid> asteroids = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
