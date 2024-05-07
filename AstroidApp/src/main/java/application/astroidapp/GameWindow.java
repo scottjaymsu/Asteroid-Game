@@ -5,9 +5,11 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -30,6 +32,12 @@ public class GameWindow extends Application {
         // Pane layout arranges the nodes in the application
         Pane pane = new Pane();
         pane.setPrefSize(width, height);
+
+        Text text = new Text(10, 20, "Points: 0");
+        pane.getChildren().add(text);
+
+        // Allows points to be increased when a method is called
+        AtomicInteger points = new AtomicInteger();
 
         // Initialize Ship
         Ship ship = new Ship(width / 2, height / 2);
@@ -86,6 +94,9 @@ public class GameWindow extends Application {
         new AnimationTimer() {
             @Override
             public void handle(long now) {
+                // Sets points
+                text.setText("Points: " + points.incrementAndGet());
+
                 // Check if LEFT key is pressed and call turnLeft method of Ship
                 if (pressedKeys.getOrDefault(KeyCode.LEFT, false)) {
                     ship.turnLeft();
@@ -141,13 +152,18 @@ public class GameWindow extends Application {
                             asteroid.setAlive(false);
                         }
                     });
+
+                    if(!projectile.isAlive()) {
+                        text.setText("Points: " + points.addAndGet(1000));
+                    }
                 });
 
+                // Removing 'non-alive characters
                 projectiles.stream()
-                        .filter(projectile -> !projectile.isAlive())
+                        .filter(projectile -> !projectile.isAlive() || projectile.isOut())
                         .forEach(projectile -> pane.getChildren().remove(projectile.getCharacter()));
                 projectiles.removeAll(projectiles.stream()
-                        .filter(projectile -> !projectile.isAlive())
+                        .filter(projectile -> !projectile.isAlive() || projectile.isOut())
                         .collect(Collectors.toList()));
 
                 asteroids.stream()
@@ -163,6 +179,16 @@ public class GameWindow extends Application {
                         stop();
                     }
                 });
+
+                Random rand = new Random();
+                // Continuously add asteroids
+                if(rand.nextDouble() < 0.0075) {
+                    Asteroid asteroid = new Asteroid(rand.nextInt(width), rand.nextInt(height));
+                    if(!asteroid.collide(ship)) {
+                        asteroids.add(asteroid);
+                        pane.getChildren().add(asteroid.getCharacter());
+                    }
+                }
             }
         }.start();
     }

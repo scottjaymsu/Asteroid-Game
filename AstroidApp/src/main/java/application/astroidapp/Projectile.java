@@ -8,6 +8,9 @@ import javafx.scene.shape.Polygon;
  * Inherits from Character
  */
 public class Projectile extends Character {
+    // Keeps track of if the projectile is in bounds or not
+    boolean out = false;
+
     /**
      * Constructor for Projectile Class
      * @param x Location along x-axis
@@ -36,12 +39,18 @@ public class Projectile extends Character {
 
         // If the new position is outside the screen bounds then prepare to remove the projectile from the screen
         if ((newX < 0) || (newX > GameWindow.width - (maxX - minX)) || (newY < 0) || (newY > GameWindow.height - (maxY - minY))) {
-            setAlive(false);
+            this.out = true;
         }
 
         // Update the character's position
         character.setTranslateX(newX);
         character.setTranslateY(newY);
     }
+
+    /**
+     * Checks whether the projectile is out of bounds
+     * @return True if the projectile is out of the screen, otherwise false
+     */
+    public boolean isOut() { return this.out; }
 }
 
