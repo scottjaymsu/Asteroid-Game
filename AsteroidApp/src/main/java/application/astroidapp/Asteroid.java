@@ -2,6 +2,9 @@ package application.asteroidapp;
 
 import java.util.Random;
 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
+
 /**
  * Asteroid Class
  * Inherits from Character Class.
@@ -22,6 +25,9 @@ public class Asteroid extends Character {
         super(new PolygonFactory().createPolygon(), x, y);
 
         Random rand = new Random();
+
+        // Set asteroid color to red
+        super.getCharacter().setFill(Color.RED);
 
         // Randomly rotate the Polygon
         super.getCharacter().setRotate(rand.nextInt(360));
