@@ -4,8 +4,6 @@ An interactive Asteroids game developed in **Java 17** using the **JavaFX** GUI 
 
 <img width="367" height="278" alt="image" src="https://github.com/user-attachments/assets/3d7d569f-dd81-4d55-a2c5-3644ba8adbe5" />
 
----
-
 ## About the Game
 
 Asteroids is a timeless video game classic originally developed and self-published by Atari in 1979. The player pilots a triangular spaceship tasked with destroying drifting asteroids by shooting them while avoiding collisions. 
@@ -23,15 +21,11 @@ This project recreates core gameplay mechanics of Asteroids as part of a course 
 - Adding a scoring system  
 - Continuously spawning new asteroids
 
----
-
 ## Prerequisites
 
 - Java 17 JDK installed  
 - Maven installed (bundled wrapper can be used)  
 - JavaFX SDK configured (if not using Maven JavaFX plugin)  
-
----
 
 ## How to Compile and Run
 
@@ -42,9 +36,6 @@ This project recreates core gameplay mechanics of Asteroids as part of a course 
    cd Asteroid-Game\AsteroidApp
    .\mvnw clean compile
    .\mvnw javafx:run
-
----
-
 ## Game Controls
 
 - Arrow keys or WASD to move and rotate the ship
