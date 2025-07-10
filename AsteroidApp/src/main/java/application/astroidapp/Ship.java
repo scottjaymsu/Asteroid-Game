@@ -1,4 +1,4 @@
-package application.astroidapp;
+package application.asteroidapp;
 
 import javafx.scene.shape.Polygon;
 
@@ -9,6 +9,7 @@ import javafx.scene.shape.Polygon;
 public class Ship extends Character {
     /**
      * Constructor for Ship Class
+     * 
      * @param x Location along x-axis
      * @param y Location along y-axis
      */

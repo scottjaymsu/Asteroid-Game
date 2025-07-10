@@ -1,4 +1,4 @@
-package application.astroidapp;
+package application.asteroidapp;
 
 import java.util.Random;
 
@@ -12,6 +12,7 @@ public class Asteroid extends Character {
 
     /**
      * Constructor for Asteroid Class
+     * 
      * @param x Location along x-axis
      * @param y Location along y-axis
      */

@@ -1,4 +1,4 @@
-package application.astroidapp;
+package application.asteroidapp;
 
 import javafx.geometry.Bounds;
 import javafx.scene.shape.Polygon;
@@ -13,6 +13,7 @@ public class Projectile extends Character {
 
     /**
      * Constructor for Projectile Class
+     * 
      * @param x Location along x-axis
      * @param y Location along y-axis
      */
@@ -37,8 +38,10 @@ public class Projectile extends Character {
         double maxX = bounds.getMaxX();
         double maxY = bounds.getMaxY();
 
-        // If the new position is outside the screen bounds then prepare to remove the projectile from the screen
-        if ((newX < 0) || (newX > GameWindow.width - (maxX - minX)) || (newY < 0) || (newY > GameWindow.height - (maxY - minY))) {
+        // If the new position is outside the screen bounds then prepare to remove the
+        // projectile from the screen
+        if ((newX < 0) || (newX > GameWindow.width - (maxX - minX)) || (newY < 0)
+                || (newY > GameWindow.height - (maxY - minY))) {
             this.out = true;
         }
 
@@ -49,8 +52,10 @@ public class Projectile extends Character {
 
     /**
      * Checks whether the projectile is out of bounds
+     * 
      * @return True if the projectile is out of the screen, otherwise false
      */
-    public boolean isOut() { return this.out; }
+    public boolean isOut() {
+        return this.out;
+    }
 }
-

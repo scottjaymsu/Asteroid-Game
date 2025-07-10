@@ -1,4 +1,4 @@
-package application.astroidapp;
+package application.asteroidapp;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

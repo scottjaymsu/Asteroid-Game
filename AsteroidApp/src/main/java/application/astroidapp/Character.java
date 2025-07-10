@@ -1,4 +1,4 @@
-package application.astroidapp;
+package application.asteroidapp;
 
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -20,9 +20,10 @@ public abstract class Character {
 
     /**
      * Constructor for Character class
+     * 
      * @param polygon Polygon that will be used for drawing
-     * @param x Location along x-axis
-     * @param y Location along y-axis
+     * @param x       Location along x-axis
+     * @param y       Location along y-axis
      */
     public Character(Polygon polygon, int x, int y) {
         this.character = polygon;
@@ -34,6 +35,7 @@ public abstract class Character {
 
     /**
      * Gets the polygon used for this character
+     * 
      * @return Polygon object
      */
     public Polygon getCharacter() {
@@ -68,7 +70,8 @@ public abstract class Character {
         double maxX = bounds.getMaxX();
         double maxY = bounds.getMaxY();
 
-        // Check if the new position is outside the screen bounds and adjust if necessary
+        // Check if the new position is outside the screen bounds and adjust if
+        // necessary
         if (newX < 0) {
             newX = 0; // Keep the character at the left edge of the screen
         } else if (newX > GameWindow.width - (maxX - minX)) {
@@ -86,7 +89,6 @@ public abstract class Character {
         this.character.setTranslateY(newY);
     }
 
-
     /**
      * Accelerates the speed at which this character moves
      */
@@ -102,8 +104,10 @@ public abstract class Character {
 
     /**
      * Check for collision between characters
+     * 
      * @param other The other character that is collided with
-     * @return If the intersection is 0, there is no collision and False is outputted
+     * @return If the intersection is 0, there is no collision and False is
+     *         outputted
      */
     public boolean collide(Character other) {
         Shape collisionArea = Shape.intersect(this.character, other.getCharacter());
@@ -112,25 +116,37 @@ public abstract class Character {
 
     /**
      * Getter for the movement attribute
+     * 
      * @return Point2D movement attribute
      */
-    public Point2D getMovement() { return this.movement; }
+    public Point2D getMovement() {
+        return this.movement;
+    }
 
     /**
      * Setter for the movement attribute
+     * 
      * @param newMovement New movement to set as the movement attribute
      */
-    public void setMovement(Point2D newMovement) { this.movement = newMovement; }
+    public void setMovement(Point2D newMovement) {
+        this.movement = newMovement;
+    }
 
     /**
      * Check if this Character is 'in the game'
+     * 
      * @return True if this Character is 'in the game,' otherwise false
      */
-    public boolean isAlive() { return this.alive; }
+    public boolean isAlive() {
+        return this.alive;
+    }
 
     /**
      * Setter for the alive attribute
+     * 
      * @param cond Boolean value to set alive attribute
      */
-    public void setAlive(boolean cond) { this.alive = cond; }
+    public void setAlive(boolean cond) {
+        this.alive = cond;
+    }
 }

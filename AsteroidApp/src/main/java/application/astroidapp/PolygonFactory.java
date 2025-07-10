@@ -1,4 +1,4 @@
-package application.astroidapp;
+package application.asteroidapp;
 
 import java.util.Random;
 import javafx.scene.shape.Polygon;
@@ -10,6 +10,7 @@ public class PolygonFactory {
 
     /**
      * Polygon Constructor
+     * 
      * @return Polygon with randomized size
      */
     public Polygon createPolygon() {

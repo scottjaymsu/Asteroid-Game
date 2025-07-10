@@ -1,4 +1,4 @@
-package application.astroidapp;
+package application.asteroidapp;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -24,8 +24,10 @@ public class GameWindow extends Application {
     /**
      * Automatically called when JavaFX application is launched.
      * Sets up the initial stage with a Pane and a Scene for the game.
+     * 
      * @param stage The primary stage that is constructed by the platform.
-     * @throws Exception If an error occurs during initialization an exception is thrown.
+     * @throws Exception If an error occurs during initialization an exception is
+     *                   thrown.
      */
     @Override
     public void start(Stage stage) throws Exception {
@@ -87,7 +89,6 @@ public class GameWindow extends Application {
             pressedKeys.put(event.getCode(), Boolean.FALSE);
         });
 
-
         /**
          * AnitmationTimer object is used to update the game elements and their methods.
          */
@@ -112,10 +113,12 @@ public class GameWindow extends Application {
                     ship.accelerate();
                 }
 
-                // Check if SPACE key is pressed and there are less than 3 projectiles then create Projectile
+                // Check if SPACE key is pressed and there are less than 3 projectiles then
+                // create Projectile
                 if (pressedKeys.getOrDefault(KeyCode.SPACE, false) && projectiles.size() < 3) {
                     // Projectile instance at ship's current location
-                    Projectile projectile = new Projectile((int) ship.getCharacter().getTranslateX(), (int) ship.getCharacter().getTranslateY());
+                    Projectile projectile = new Projectile((int) ship.getCharacter().getTranslateX(),
+                            (int) ship.getCharacter().getTranslateY());
                     // Set the rotation of the projectile to match the ship's rotation
                     projectile.getCharacter().setRotate(ship.getCharacter().getRotate());
 
@@ -133,7 +136,8 @@ public class GameWindow extends Application {
 
                 projectiles.forEach(projectile -> {
                     List<Asteroid> collisions = asteroids.stream() // Create stream
-                            .filter(asteroid -> asteroid.collide(projectile)) // Filter through stream to find asteroids that collide with projectile
+                            .filter(asteroid -> asteroid.collide(projectile)) // Filter through stream to find asteroids
+                                                                              // that collide with projectile
                             .collect(Collectors.toList()); // Collect colliders and add to collision list
 
                     collisions.stream().forEach(collided -> {
@@ -144,7 +148,8 @@ public class GameWindow extends Application {
                     projectile.move();
                 });
 
-                // If Projectile collides with an Asteroid, then it's alive attribute is set to False
+                // If Projectile collides with an Asteroid, then it's alive attribute is set to
+                // False
                 projectiles.forEach(projectile -> {
                     asteroids.forEach(asteroid -> {
                         if (projectile.collide(asteroid)) {
@@ -153,7 +158,7 @@ public class GameWindow extends Application {
                         }
                     });
 
-                    if(!projectile.isAlive()) {
+                    if (!projectile.isAlive()) {
                         text.setText("Points: " + points.addAndGet(1000));
                     }
                 });
@@ -182,9 +187,9 @@ public class GameWindow extends Application {
 
                 Random rand = new Random();
                 // Continuously add asteroids
-                if(rand.nextDouble() < 0.0075) {
+                if (rand.nextDouble() < 0.0075) {
                     Asteroid asteroid = new Asteroid(rand.nextInt(width), rand.nextInt(height));
-                    if(!asteroid.collide(ship)) {
+                    if (!asteroid.collide(ship)) {
                         asteroids.add(asteroid);
                         pane.getChildren().add(asteroid.getCharacter());
                     }
@@ -195,6 +200,7 @@ public class GameWindow extends Application {
 
     /**
      * Main entry for program
+     * 
      * @param args
      */
     public static void main(String[] args) {
