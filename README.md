@@ -1,6 +1,7 @@
 # Asteroid App
 
 An interactive Asteroids game developed in **Java 17** using the **JavaFX** GUI framework. The game features smooth event-driven gameplay and classic arcade mechanics inspired by Atari’s 1979 hit.
+
 <img width="367" height="278" alt="image" src="https://github.com/user-attachments/assets/3d7d569f-dd81-4d55-a2c5-3644ba8adbe5" />
 
 ---
@@ -20,11 +21,7 @@ This project recreates core gameplay mechanics of Asteroids as part of a course 
 - Keeping the ship within the game window bounds  
 - Implementing projectiles for shooting asteroids  
 - Adding a scoring system  
-- Continuously spawning new asteroids  
-
----
-
-## Project Structure
+- Continuously spawning new asteroids
 
 ---
 
